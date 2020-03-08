@@ -1,0 +1,201 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    border:none;
+    outline:none;
+    list-style: none;
+}
+
+body{
+    background-image: linear-gradient(90deg, #74ebd5 10%, #acb6e5 90%);
+    font-family: Lato, sans-serif;
+}
+
+#app{
+    display:flex;
+    justify-content: space-around;
+    margin: 3% 0%;
+}
+
+.vue-form{
+    width: 600px;
+    border-radius: 5px;
+    padding: 3% 2.6%;
+    background-color: white;
+}
+
+.visual-box{
+    width: 500px;
+}
+
+.cupcake{
+    position:fixed;
+    top: 48%;
+    left: 70%;
+}
+
+fieldset{
+    padding: 3%;
+    border: 2px solid #acb6e5;
+}
+
+legend{
+    font-size: 1.32em;
+    color: #424141;  
+    font-weight: 600;
+}
+
+h4{
+    color: #888888;
+    font-weight: 400;
+    font-size: 1.1em;
+}
+
+fieldset > div{
+    margin-top: 5% ;
+}
+
+ul{
+    margin-top: 2%;
+}
+
+li{
+    cursor: pointer;
+}
+
+.vue-base li, .vue-sprinkles li, .vue-fruit li{
+    display: inline-block;
+    margin-right: 5%;
+}
+
+label{
+    color: #424141; 
+    cursor: pointer; 
+}
+
+input{
+    cursor: pointer; 
+}
+
+input[type=radio], input[type=checkbox]{
+    visibility:hidden;
+    position:absolute;
+}
+
+input[type=radio] + label::before, input[type=checkbox] + label::before {
+    position:relative;
+    height: 12px;
+    width: 12px;
+    margin-right: 6px;
+    border-radius: 10px;
+    content: " ";
+    display: inline-block;
+    vertical-align: baseline;
+    border: 1px solid #424141; 
+    transition: box-shadow 0.2s, border 0.2s;
+}
+
+input[type=radio]:hover + label:before, input[type=checkbox]:hover + label:before {
+    background-color: #74ebd5;
+}
+
+input[type=radio]:checked + label:before, input[type=checkbox]:checked + label:before  {
+    background-color: #74ebd5;
+    border: 2px solid white;
+    width: 10px;
+    height: 10px;
+    box-shadow: 0 0 0 1pt #424141; 
+}
+
+input[type=radio]:checked + label, input[type=checkbox]:checked + label{
+    font-weight: 600;
+}
+
+[for=quantity], input[type=number]{
+    display: inline-block;
+    color: #888888;
+    font-size: 1.1em;
+    font-weight: 400;
+}
+
+/*remove default arrows*/
+
+    input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    input[type=number]
+    {
+    -moz-appearance: textfield;
+    }
+
+input[type=number]{
+    border-bottom: 1px solid #888888; 
+    padding: 0 2% ;
+    width: 100px;
+}
+
+.decrease, .increase{
+    display: inline-block;
+    width: 40px;
+    margin: 0 2%;
+    padding: 0 1%;
+    font-size: 1.8em;
+    background-color: #acb6e5;
+    color:white;
+}
+
+.vue-submit{
+    margin-top: 6%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-to-cart{
+    height: 50px;
+    width: 200px;
+    padding: 2% 10%;
+    font-family:Lato, sans-serif;
+    font-size: 1.2em;
+    border-radius: 7px;
+    background-color: #acb6e5;
+    color: white;
+    font-weight: 700;
+}
+
+.add-to-cart:hover{
+    background-color:#8f9acb;
+    cursor: pointer;
+}
+
+.vue-cost{
+    font-size: 0.9em;
+    font-weight: 300;
+    color: #424141; 
+}
+
+span{
+    color: #8f9acb;
+}
+
+.sprinkles{
+    position:absolute;
+    right: 10%;
+    bottom: 76%;
+}
+
+.fruit{
+    position:absolute;
+    right:51%;
+    bottom: 90%;
+}
+
+.frosting{
+    position:absolute;
+    bottom: 74%;
+    right: 10%;
+}
+
