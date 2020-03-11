@@ -17,7 +17,7 @@
                 <div>
                     <h4>1. Pick your base*:</h4>
                     <ul class="vue-base">
-                        <li v-for="(base, index) in base">                    
+                        <li v-for="(base, index) in bases">                    
                             <input type="radio" :id="'base-'+index" :value="base" v-model="selection.base">
                             <label :for="'base-'+index"> {{base.name}}</label>
                         </li>
@@ -27,26 +27,9 @@
                 <div>
                     <h4>2. Now choose a filling flavor*:</h4>
                     <ul class="vue-filling">
-                        <li>
-                            <input type="radio" name="filling" id="filling-1" value="Chocolate" v-model="selection.filling">
-                            <label for="filling-1">Chocolate</label>
-                        </li>
-                        <li>
-                            <input type="radio" name="filling" id="filling-2" value="Strawberry" v-model="selection.filling">
-                            <label for="filling-2">Strawberry</label>
-                        </li>
-                        <li>
-                            <input type="radio" name="filling" id="filling-3" value="Pistachio" v-model="selection.filling">
-                            <label for="filling-3">Pistachio</label>
-                        </li>
-                        <li>
-                            <input type="radio" name="filling" id="filling-4" value="Lemon" v-model="selection.filling">
-                            <label for="filling-4">Lemon</label>
-                        </li>
-                        <li>
-                            <input type="radio" name="filling" id="filling-5" value="Banana" v-model="selection.filling">
-                            <label for="filling-5">Banana</label>
-                        </li>
+                        <li v-for="(filling, index) in fillings">
+                            <input type="radio" :id="'filling-'+index" :value="filling" v-model="selection.filling">
+                            <label :for="'filling-'+index">{{filling.name}}</label>
                     </ul>
                 </div>
 
@@ -61,31 +44,33 @@
                 </div>
 
                 <div>
-                    <h4>4. Shall we add some sprinkles (+ € 0.1)?</h4>
+                    <h4>4. Shall we add some sprinkles?</h4>
                     <ul class="vue-sprinkles">
                         <li v-for="(sprinkle, index) in sprinkles">
                             <input type="radio" :id="'sprinkles-'+index" :value="sprinkle" v-model="selection.sprinkles" :disabled="!requiredFilled()" >
-                            <label :for="'sprinkles-'+index">{{sprinkle.name}}</label>
+                            <label :for="'sprinkles-'+index">{{sprinkle.name}} (+ € {{sprinkle.price}})</label>
                         </li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4>5. Finally, pick a fruit topping (+ € 0.15):</h4>
+                    <h4>5. Finally, pick a fruit topping:</h4>
                     <ul class="vue-fruit">
                         <li v-for="(fruit,index) in fruits">
-                            <input type="radio" :id="'fruit-'+index" :value="fruit" v-model="selection.fruits" :disabled="!requiredFilled()">
-                            <label :for="'fruit-'+index">{{fruit.name}}</label>
+                            <input type="radio" :id="'fruit-'+index" :value="fruit" v-model="selection.fruit" :disabled="!requiredFilled()">
+                            <label :for="'fruit-'+index">{{fruit.name}} (+ € {{fruit.price}})</label>
                         </li>
                     </ul>
                 </div>
 
                 <div>
-                    <label :for="quantity">Quantity</label>
+                    <label :for="quantity">Quantity <span>(Max. 50)</span></label>
                     <button type="button" class="decrease" v-on:click="quantity--" :disabled="quantity<2">-</button>
                     <input type="number" :id="quantity" v-model="quantity">
                     <button type="button" class="increase" v-on:click="quantity++" :disabled="quantity>50">+</button>
+                </div>
 
+                <div>
                     <div class="vue-submit">
                         <div class="vue-cost">
                             <h3>Price without VAT: <span>€ {{totalPrice}}</span><br>VAT: 20% <br> Total cost: <span>€ {{finalCost}}</span> </h3>
@@ -99,12 +84,14 @@
 
         <div class="visual-box">
             <div class="cupcake">
-                <img :src="selection.base.src" alt="cupcake image" class="base">
+                <img src="Images/Base.svg" class="base" v-show="!hasBase()">
+                <img :src="selection.base.src" class="base">
+                <img :src="selection.filling.src" class="filling" class="filling">
                 <img :src="hasFrosting() ? selection.frostings[0].src : ''" class="frosting">
-                <img src="Images/sprinkles.svg" v-show="hasSprinkles()" class="sprinkles">
-                <img :src="hasFruit() ? selection.fruits.src : ''" class="fruit">
+                <img :src="selection.frostings.length ===2 ? selection.frostings[1].srcTwo : ''" class="frosting">
+                <img :src="selection.sprinkles.src"  class="sprinkles">
+                <img :src="hasFruit() ? selection.fruit.src : ''" class="fruit">
             </div>
-            
         </div>
 
     </div>
