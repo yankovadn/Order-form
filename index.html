@@ -28,7 +28,7 @@
                     <h4>2. Now choose a filling flavor*:</h4>
                     <ul class="vue-filling">
                         <li v-for="(filling, index) in fillings">
-                            <input type="radio" :id="'filling-'+index" :value="filling" v-model="selection.filling">
+                            <input type="radio" :id="'filling-'+index" :value="filling" v-model="selection.filling" :disabled="!hasBase()">
                             <label :for="'filling-'+index">{{filling.name}}</label>
                     </ul>
                 </div>
@@ -37,7 +37,7 @@
                     <h4>3. Let's put some frosting on top. Choose up to 2 flavors*. </h4>
                     <ul class="vue-frosting">
                         <li v-for="(frosting, index) in frostings">
-                            <input type="checkbox" :value="frosting" v-model="selection.frostings" :id="'frosting-'+index" :disabled="selection.frostings.length>1 && selection.frostings.indexOf(frosting)===-1">
+                            <input type="checkbox" :value="frosting" v-model="selection.frostings" :id="'frosting-'+index" :disabled="selection.frostings.length>1 && selection.frostings.indexOf(frosting)===-1 || !hasBase()">
                             <label :for="'frosting-'+index">{{frosting.name}} (+ € {{frosting.price}})</label>
                         </li>
                     </ul>
